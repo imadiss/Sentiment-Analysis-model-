@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About the Model</title>
+    <!-- FontAwesome CDN for LinkedIn icon -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #121212; /* Dark background for better contrast */
+            color: #f4f4f4; /* Light text color */
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+        }
+        h1 {
+            color: #f0f0f0;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            letter-spacing: 2px;
+            text-transform: uppercase; /* Capitalize the title */
+        }
+        p {
+            color: #dcdcdc;
+            font-size: 1.2em;
+            line-height: 1.6;
+            max-width: 700px;
+            margin-top: 20px;
+            margin-bottom: 40px;
+        }
+        .about-btn {
+            background: none;
+            color: #007bff;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-top: 30px;
+            transition: color 0.3s, transform 0.2s;
+        }
+        .about-btn:hover {
+            color: #0056b3;
+            transform: translateY(-2px);
+        }
+        footer {
+            margin-top: 40px;
+            font-size: 1em;
+            color: #888;
+        }
+        footer a {
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s, transform 0.2s;
+            display: flex;
+            align-items: center; /* Align icon and text horizontally */
+        }
+        footer a:hover {
+            color: #0056b3;
+            text-decoration: none; /* Remove underline */
+            transform: translateY(-2px); /* Lift effect on hover */
+        }
+        .linkedin-icon {
+            margin-right: 10px; /* Space between icon and text */
+            font-size: 20px;
+            vertical-align: middle; /* Align icon with the text */
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>About Me</h1>
+        <p>
+            I am a machine learning model developed to perform sentiment analysis on text data. I was trained using the Logistic Regression algorithm, a widely used method for classification tasks. My training dataset includes labeled text, which allows me to predict whether a given piece of text expresses a positive or negative sentiment.
+        </p>
+        <p>
+            By leveraging natural language processing (NLP) techniques, I analyze the input text and classify it as either "positive" or "negative" based on the features extracted. My goal is to provide users with an intuitive and efficient way to understand the sentiment behind various pieces of text.
+        </p>
+
+        <a href="/" class="about-btn">Go Back to Sentiment Analysis</a>
+    </div>
+    <footer>
+        <a href="https://www.linkedin.com/in/aimad-assami-5b6ba4288/" target="_blank">
+            <i class="fab fa-linkedin linkedin-icon"></i>LinkedIn
+        </a>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #000000; /* Black background */
+            color: #f4f4f4; /* Light text color */
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column; /* Stack elements vertically */
+            align-items: center; /* Center elements horizontally */
+            justify-content: center; /* Center elements vertically */
+            height: 100vh; /* Full viewport height */
+            position: relative; /* Allow absolute positioning for the About Me button */
+        }
+        h1 {
+            color: #f0f0f0;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2em; /* Larger font size for the title */
+        }
+        textarea {
+            width: 400px; /* Fixed width */
+            height: 150px; /* Fixed height */
+            padding: 15px; /* Increased padding for better spacing */
+            border: 1px solid #555; /* Dark border */
+            border-radius: 5px; /* Slightly rounded corners */
+            font-size: 16px; /* Slightly larger font */
+            background-color: #333; /* Darker textarea */
+            color: #f4f4f4; /* Light text color */
+            resize: none; /* Disable resizing */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow effect */
+            margin-bottom: 15px; /* Space below textarea */
+        }
+        button {
+            background-color: #4CAF50; /* Green button */
+            color: white;
+            border: none;
+            padding: 12px 20px; /* Increased padding for better spacing */
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 400px; /* Fixed width */
+            margin-left: 15px;
+            margin-top: 15px; /* More space above the button */
+            transition: background-color 0.3s, transform 0.2s; /* Smooth transition */
+        }
+        button:hover {
+            background-color: #45a049; /* Darker green on hover */
+            transform: translateY(-2px); /* Subtle lift effect on hover */
+        }
+        footer {
+            margin-top: 20px; /* Space above the footer */
+            font-size: 14px; /* Smaller font size */
+            color: #ccc; /* Light gray text for footer */
+            text-align: center; /* Center the footer text */
+        }
+
+        /* About Me button as text with hover effect */
+        .about-me-btn {
+            position: absolute; /* Absolute positioning */
+            top: 20px; /* Distance from the top of the viewport */
+            right: 20px; /* Distance from the right of the viewport */
+            background: none; /* No background */
+            color: #007bff; /* Blue text */
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none; /* Remove underline */
+            transition: color 0.3s, transform 0.2s; /* Smooth transition */
+        }
+
+        .about-me-btn:hover {
+            color: #0056b3; /* Darker blue text on hover */
+            transform: translateY(-2px); /* Subtle lift effect on hover */
+        }
+
+        /* Result styling */
+        .result {
+            margin-top: 20px; /* Space above the result */
+            padding: 15px; /* Increased padding for better spacing */
+            border-radius: 5px;
+            background-color: #444; /* Dark background for result */
+            color: white;
+            text-align: center; /* Center the result text */
+            max-width: 400px; /* Set a max width */
+            width: 400px; /* Fixed width */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow effect */
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Sentiment Analysis</h1>
+        <form method="post">
+            {% csrf_token %}
+            <textarea id="inputText" name="text" placeholder="Enter your text here...">{{ text }}</textarea>
+            <br>
+            <button type="submit">Analyze Sentiment</button>
+        </form>
+
+        {% if result %}
+            <div class="result">
+                <strong>Sentiment Result:</strong> {{ result }}
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- About Me button in the upper right corner -->
+    <a href="/about" class="about-me-btn">About Me</a>
+
+    <footer>
+        <p>Thank you for using my model</p>
+    </footer>
+
+    <script>
+        // Function to save the textarea content to local storage
+        function saveInput() {
+            const textArea = document.getElementById('inputText');
+            localStorage.setItem('inputText', textArea.value);
+        }
+
+        // Function to retrieve the textarea content from local storage
+        function loadInput() {
+            const savedText = localStorage.getItem('inputText');
+            if (savedText) {
+                document.getElementById('inputText').value = savedText;
+            }
+        }
+
+        // Load the input when the page is loaded
+        window.onload = function() {
+            loadInput();
+        };
+
+        // Save the input when the textarea value changes
+        document.getElementById('inputText').addEventListener('input', saveInput);
+    </script>
+</body>
+</html>

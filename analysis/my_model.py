@@ -1,10 +1,16 @@
 import pandas as pd
+import os
+from django.conf import settings
 
-df=pd.read_csv("C:\\Users\\asus\\Downloads\\archive (3)\\Train.csv")
+dataset_path = os.path.join(settings.BASE_DIR, 'dataset', 'Train.csv')
+dataset_path_test = os.path.join(settings.BASE_DIR, 'dataset', 'Test.csv')
+
+
+df=pd.read_csv(dataset_path)
 df=df.dropna()
 df['text']=df['text'].str.lower()
 
-df_test=pd.read_csv("C:\\Users\\asus\\Downloads\\archive (3)\\Test.csv")
+df_test=pd.read_csv(dataset_path_test)
 df=df.dropna()
 df_test['text']=df_test['text'].str.lower()
 
@@ -38,8 +44,8 @@ model.fit(x,y)
 x_test=v.transform(df_test['text'])
 y_test=df_test['label'].to_numpy()
 y_predict=model.predict(x_test)
-print('Accuracy: ',str(accuracy_score(y_test,y_predict)*100)+'%')
-print('Report:\n',classification_report(y_test, y_predict))
+#print('Accuracy: ',str(accuracy_score(y_test,y_predict)*100)+'%')
+#print('Report:\n',classification_report(y_test, y_predict))
 
 def prediction(text):
     t=v.transform([text])

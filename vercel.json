@@ -18,6 +18,5 @@
             "src": "/(.*)",
             "dest": "sentiment_analysis/wsgi.py"
         }
-    ],
-    "outputDirectory": "staticfiles_build"
+    ]
 }

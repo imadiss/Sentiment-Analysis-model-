@@ -1,0 +1,13 @@
+{
+    "builds": [{
+        "src": "sentiment_analysis/wsgi.py",
+        "use": "@vercel/python",
+        "config": { "maxLambdaSize": "15mb", "runtime": "python 3.11.4" }
+    }],
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "sentiment_analysis/wsgi.py"
+        }
+    ]
+}

@@ -27,7 +27,7 @@ from sklearn.tree import DecisionTreeClassifier
 model1=svm.SVC(kernel='linear')
 model2=RandomForestClassifier(n_estimators=100)
 model3=MultinomialNB()
-model4=LogisticRegression()
+model4=LogisticRegression(max_iter=1000)
 model5=DecisionTreeClassifier()
 
 model=model4

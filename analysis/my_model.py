@@ -1,16 +1,10 @@
 import pandas as pd
-import os
-from django.conf import settings
 
-dataset_path = os.path.join(settings.BASE_DIR, 'dataset', 'Train.csv')
-dataset_path_test = os.path.join(settings.BASE_DIR, 'dataset', 'Test.csv')
-
-
-df=pd.read_csv(dataset_path)
+df=pd.read_csv('Dataset/Train.csv')
 df=df.dropna()
 df['text']=df['text'].str.lower()
 
-df_test=pd.read_csv(dataset_path_test)
+df_test=pd.read_csv('Dataset/Train.csv')
 df=df.dropna()
 df_test['text']=df_test['text'].str.lower()
 
@@ -19,7 +13,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.linear_model import LogisticRegression
 
 
-model=LogisticRegression(max_iter=10)
+model=LogisticRegression()
 
 
 

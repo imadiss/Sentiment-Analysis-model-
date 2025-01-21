@@ -9,10 +9,5 @@
           "src": "/(.*)",
           "dest": "sentiment_analysis/wsgi.py"
       }
-  ],
-  "functions": {
-    "api/**": {
-      "excludeFiles": "{.next,*.cache,node_modules,public,app}/**"
-    }
-  }
+  ]
 }

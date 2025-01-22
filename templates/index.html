@@ -15,7 +15,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            min-height: 100vh;
             position: relative;
         }
         h1 {
@@ -25,7 +25,8 @@
             font-size: 2em;
         }
         textarea {
-            width: 400px;
+            width: 100%;
+            max-width: 400px;
             height: 150px;
             padding: 15px;
             border: 1px solid #555;
@@ -45,8 +46,9 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
-            width: 400px;
-            margin-left: 15px;
+            width: 100%;
+            max-width: 400px;
+            margin-left: 0;
             margin-top: 15px;
             transition: background-color 0.3s, transform 0.2s;
         }
@@ -83,8 +85,8 @@
             background-color: #444;
             color: white;
             text-align: center;
+            width: 100%;
             max-width: 400px;
-            width: 400px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
         }
         .loading {
@@ -109,6 +111,43 @@
             color: white;
             font-size: 18px;
             font-weight: bold;
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.5em;
+                margin-bottom: 15px;
+            }
+            textarea {
+                font-size: 14px;
+                height: 120px;
+            }
+            button {
+                font-size: 14px;
+                padding: 10px 15px;
+            }
+            .result {
+                font-size: 14px;
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.2em;
+            }
+            textarea {
+                font-size: 12px;
+                height: 100px;
+            }
+            button {
+                font-size: 12px;
+                padding: 8px 10px;
+            }
+            footer {
+                font-size: 12px;
+            }
         }
     </style>
 </head>
@@ -142,16 +181,8 @@
 
     <script>
         function showLoading() {
-            // Display the loading spinner
             const spinner = document.getElementById('loadingSpinner');
             spinner.style.display = 'flex';
-
-            // Hold the loading state for 3 seconds (simulate processing delay)
-            setTimeout(() => {
-                spinner.style.display = 'none';
-            }, 3000); // 3000ms = 3 seconds
-
-            // Allow form submission after loading simulation
             return true;
         }
 

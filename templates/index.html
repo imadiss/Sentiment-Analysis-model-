@@ -91,44 +91,47 @@
             display: none;
             flex-direction: column;
             align-items: center;
-            margin-top: 20px;
-            color: white;
+            justify-content: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
         }
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 5px solid rgba(255, 255, 255, 0.2);
-            border-top: 5px solid white;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
+        .loading img {
+            width: 50px;
+            height: 50px;
             margin-bottom: 10px;
         }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .loading p {
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
     <div>
         <h1>Sentiment Analysis</h1>
-        <form method="post" onsubmit="showLoading()">
+        <form method="post" onsubmit="return showLoading()">
             {% csrf_token %}
             <textarea id="inputText" name="text" placeholder="Enter your text here...">{{ text }}</textarea>
             <br>
             <button type="submit">Analyze Sentiment</button>
         </form>
 
-        <div class="loading" id="loadingSpinner">
-            <div class="spinner"></div>
-            <p>Analyzing...</p>
-        </div>
-
         {% if result %}
             <div class="result">
                 <strong>Sentiment Result:</strong> {{ result }}
             </div>
         {% endif %}
+    </div>
+
+    <div id="loadingSpinner" class="loading">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Gray_circles_rotate.gif" alt="Loading...">
+        <p>Analyzing...</p>
     </div>
 
     <a href="/about" class="about-me-btn">About Me</a>
@@ -138,6 +141,20 @@
     </footer>
 
     <script>
+        function showLoading() {
+            // Display the loading spinner
+            const spinner = document.getElementById('loadingSpinner');
+            spinner.style.display = 'flex';
+
+            // Hold the loading state for 3 seconds (simulate processing delay)
+            setTimeout(() => {
+                spinner.style.display = 'none';
+            }, 3000); // 3000ms = 3 seconds
+
+            // Allow form submission after loading simulation
+            return true;
+        }
+
         function saveInput() {
             const textArea = document.getElementById('inputText');
             localStorage.setItem('inputText', textArea.value);
@@ -148,10 +165,6 @@
             if (savedText) {
                 document.getElementById('inputText').value = savedText;
             }
-        }
-
-        function showLoading() {
-            document.getElementById('loadingSpinner').style.display = 'flex';
         }
 
         window.onload = function() {

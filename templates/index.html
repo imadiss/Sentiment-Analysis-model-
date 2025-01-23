@@ -159,6 +159,7 @@
             <textarea id="inputText" name="text" placeholder="Enter your text here...">{{ text }}</textarea>
             <br>
             <button type="submit">Analyze Sentiment</button>
+            <button type="button" onclick="clearInput()">Clear Input</button>
         </form>
 
         {% if result %}
@@ -196,6 +197,12 @@
             if (savedText) {
                 document.getElementById('inputText').value = savedText;
             }
+        }
+
+        function clearInput() {
+            const textArea = document.getElementById('inputText');
+            textArea.value = '';
+            localStorage.removeItem('inputText'); // Remove saved input from local storage
         }
 
         window.onload = function() {

@@ -8,10 +8,9 @@ def index(request):
         text = request.POST.get('text')
         if text:
             res = prediction(text)
-
-            # Insert the input and result into the database using raw SQL
+            client_ip = request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR'))
             with connection.cursor() as cursor:
-                cursor.execute("INSERT INTO DATA (INPUT, OUTPUT) VALUES (%s, %s)", [text, res])
+                cursor.execute("INSERT INTO DATA (INPUT, OUTPUT, IP_ADDRESS) VALUES (%s, %s, %s)", [text, res, client_ip])
         else:
             res = "Please enter some text for analysis."
     return render(request, 'index.html', {'result': res})

@@ -74,12 +74,16 @@ WSGI_APPLICATION = 'sentiment_analysis.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',  # or 'django.db.backends.postgresql' for PostgreSQL
+        'NAME': 'sentiment_analysis_app',
+        'USER': 'root',
+        'PASSWORD': 'imadimad',
+        'HOST': 'localhost',  # Or the appropriate host
+        'PORT': '3306',  # Default MySQL port
+    }
+}
 
 
 # Password validation

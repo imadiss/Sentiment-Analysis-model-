@@ -76,14 +76,15 @@ WSGI_APPLICATION = 'sentiment_analysis.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',  # or 'django.db.backends.postgresql' for PostgreSQL
-        'NAME': 'sentiment_analysis_app',
-        'USER': 'root',
-        'PASSWORD': 'imadimad',
-        'HOST': 'localhost',  # Or the appropriate host
-        'PORT': '3306',  # Default MySQL port
+        'ENGINE': 'django.db.backends.mysql',  # Change this line to MySQL
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'HOST': os.environ.get('DB_HOST'),
+        'PORT': os.environ.get('DB_PORT'),  # Default MySQL port is 3306
     }
 }
+
 
 
 # Password validation

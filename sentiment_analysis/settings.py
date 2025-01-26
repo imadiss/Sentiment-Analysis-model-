@@ -76,9 +76,9 @@ WSGI_APPLICATION = 'sentiment_analysis.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    'default': dj_database_url.config(default=os.getenv('postgresql://sentiment_analysis_app_user:W4pVRXNoFZ8zM70x6q8OCFwlLerFBGXa@dpg-cub17it2ng1s73alc93g-a.oregon-postgres.render.com/sentiment_analysis_app'))
-}
+DATABASES=dict()
+
+DATABASES["default"]=dj_database_url.parse("postgresql://sentiment_analysis_app_user:W4pVRXNoFZ8zM70x6q8OCFwlLerFBGXa@dpg-cub17it2ng1s73alc93g-a.oregon-postgres.render.com/sentiment_analysis_app")
 
 
 # Password validation

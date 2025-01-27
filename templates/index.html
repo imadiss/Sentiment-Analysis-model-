@@ -38,6 +38,13 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
             margin-bottom: 15px;
         }
+        .button-container {
+            display: flex;
+            gap: 10px; /* Space between buttons */
+            width: 100%;
+            max-width: 400px; /* Match the width of the textarea */
+            justify-content: center; /* Center buttons horizontally */
+        }
         button {
             background-color: #4CAF50;
             color: white;
@@ -46,15 +53,19 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
-            width: 100%;
-            max-width: 400px;
-            margin-left: 15px;
-            margin-top: 15px;
+            margin-left: 30px;
+            flex: 1; /* Equal width for buttons */
             transition: background-color 0.3s, transform 0.2s;
         }
         button:hover {
             background-color: #45a049;
             transform: translateY(-2px);
+        }
+        .clear-button {
+            background-color: #f44336; /* Red background */
+        }
+        .clear-button:hover {
+            background-color: #e53935; /* Darker red on hover */
         }
         footer {
             margin-top: 20px;
@@ -102,10 +113,17 @@
             background-color: rgba(0, 0, 0, 0.8);
             z-index: 1000;
         }
-        .loading img {
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
             width: 50px;
             height: 50px;
-            margin-bottom: 10px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         .loading p {
             color: white;
@@ -154,12 +172,14 @@
 <body>
     <div>
         <h1>Sentiment Analysis</h1>
-        <form method="post" onsubmit="return showLoading()">
+        <form method="post" onsubmit="return validateForm()">
             {% csrf_token %}
-            <textarea id="inputText" name="text" placeholder="Enter your text here...">{{ text }}</textarea>
+            <textarea id="inputText" name="text" placeholder="Enter your text here..." required>{{ text }}</textarea>
             <br>
-            <button type="submit">Analyze Sentiment</button>
-            <button type="button" onclick="clearInput()">Clear Input</button>
+            <div class="button-container">
+                <button type="submit" aria-label="Analyze Sentiment">Analyze Sentiment</button>
+                <button type="button" class="clear-button" aria-label="Clear Input" onclick="clearInput()">Clear Input</button>
+            </div>
         </form>
 
         {% if result %}
@@ -170,7 +190,7 @@
     </div>
 
     <div id="loadingSpinner" class="loading">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Gray_circles_rotate.gif" alt="Loading...">
+        <div class="loading-spinner"></div>
         <p>Analyzing...</p>
     </div>
 
@@ -187,22 +207,43 @@
             return true;
         }
 
+        function validateForm() {
+            const textArea = document.getElementById('inputText');
+            if (textArea.value.trim() === '') {
+                alert('Please enter some text before analyzing.');
+                return false;
+            }
+            return showLoading();
+        }
+
         function saveInput() {
             const textArea = document.getElementById('inputText');
-            localStorage.setItem('inputText', textArea.value);
+            try {
+                localStorage.setItem('inputText', textArea.value);
+            } catch (e) {
+                console.error('Failed to save input:', e);
+            }
         }
 
         function loadInput() {
-            const savedText = localStorage.getItem('inputText');
-            if (savedText) {
-                document.getElementById('inputText').value = savedText;
+            try {
+                const savedText = localStorage.getItem('inputText');
+                if (savedText) {
+                    document.getElementById('inputText').value = savedText;
+                }
+            } catch (e) {
+                console.error('Failed to load input:', e);
             }
         }
 
         function clearInput() {
             const textArea = document.getElementById('inputText');
             textArea.value = '';
-            localStorage.removeItem('inputText'); // Remove saved input from local storage
+            try {
+                localStorage.removeItem('inputText');
+            } catch (e) {
+                console.error('Failed to clear input:', e);
+            }
         }
 
         window.onload = function() {

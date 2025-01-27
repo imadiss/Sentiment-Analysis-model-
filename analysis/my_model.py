@@ -21,7 +21,7 @@ def handle_negation(text):
         lambda match: "NOT_" + match.group(0).replace(" ", "_")),
 
         # Handle "don't/doesn't/didn't + verb + object" (e.g., "I don't feel great")
-        (r"\b(don't|doesn't|didn't)\s+(think|believe|feel|hope|know)\s+([\w\s]+)",
+        (r"\b(not|don't|doesn't|didn't)\s+(think|believe|feel|hope|know)\s+([\w\s]+)",
          lambda match: "NOT_" + match.group(2) + "_" + match.group(3).replace(" ", "_")),
 
         # Handle auxiliary verbs + "not" + verb (e.g., "I do not want", "You did not see")
